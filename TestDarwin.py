@@ -47,6 +47,21 @@ class TestDarwin (TestCase) :
         a = Darwin.Species("a")
         a.addInstruction("if_empty 1")
         self.assertEqual(a.program[0],["if_empty", 1])
+        
+    def test_species_6(self):
+        # Program navigation
+        a = Darwin.Species("a")
+        a.addInstruction("if_wall 3")
+        a.addInstruction("hop")
+        a.addInstruction("go 0")
+        a.addInstruction("left")
+        a.addInstruction("go 0")
+        self.assertEqual(a.program[0], ["if_wall", 3])
+        self.assertEqual(a.program[1], ["hop"])
+        self.assertEqual(a.program[2], ["go", 0])
+        self.assertEqual(a.program[3], ["left"])
+        self.assertEqual(a.program[4], ["go", 0])
+        
     # ------
     # Darwin
     # ------
