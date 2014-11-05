@@ -23,5 +23,13 @@ class Species:
     def addInstruction(self, instruction):
         assert type(instruction) is str
         
+        instruction = instruction.split()
+        
+        # Control command conversion
+        if len(instruction) > 1:
+            line = instruction[1]
+            line = int(line)
+            instruction[1] = line
+            
         self.program.append(instruction)
         

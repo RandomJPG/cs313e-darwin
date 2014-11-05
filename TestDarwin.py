@@ -42,6 +42,11 @@ class TestDarwin (TestCase) :
         a.addInstruction("1")
         self.assertEqual(len(a.program), 1)
     
+    def test_species_5(self):
+        # Control commands
+        a = Darwin.Species("a")
+        a.addInstruction("if_empty 1")
+        self.assertEqual(a.program[0],["if_empty", 1])
     # ------
     # Darwin
     # ------
