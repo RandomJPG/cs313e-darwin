@@ -8,6 +8,7 @@
 # -------
 
 from io       import StringIO
+import re
 from unittest import main, TestCase
 import Darwin
 
@@ -62,6 +63,47 @@ class TestDarwin (TestCase) :
         self.assertEqual(a.program[3], ["left"])
         self.assertEqual(a.program[4], ["go", 0])
         
+    # --------
+    # Creature
+    # --------
+    
+    def test_creature_1(self):
+        # X/Y coordinates
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertIsNone(b.x)
+        self.assertIsNone(b.y)
+        
+    def test_creature_2(self):
+        # Direction
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertIsNone(b.d)
+        
+    def test_creature_3(self):
+        # Id
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertIsNone(b.id)
+        
+    def test_creature_4(self):
+        # Species
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertEqual(type(b.species),Darwin.Species)
+        
+    def test_creature_5(self):
+        # Species name
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertEqual(b.species.name,"a")
+        
+    def test_creature_6(self):
+        # Program
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        self.assertEqual(a.program,b.program)
+    
     # ------
     # Darwin
     # ------

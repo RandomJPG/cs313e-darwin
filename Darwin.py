@@ -11,7 +11,13 @@ class Darwin:
         
         self.h = height
         self.w = width
-
+        self.creatures = []
+        
+    def addCreature(self, Creature, x, y, d):
+        self.creatures.append(Creature)
+        
+        
+        
 class Species:
     
     def __init__(self, name):
@@ -25,7 +31,7 @@ class Species:
         
         instruction = instruction.split()
         
-        # Control command conversion
+        # Control Instruction conversion
         if len(instruction) > 1:
             line = instruction[1]
             line = int(line)
@@ -33,3 +39,12 @@ class Species:
             
         self.program.append(instruction)
         
+class Creature:
+
+    def __init__(self, Species):
+        self.species = Species
+        self.x = None
+        self.y = None
+        self.d = None
+        self.id = None
+        self.program = Species.program    
