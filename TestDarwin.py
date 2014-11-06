@@ -105,11 +105,16 @@ class TestDarwin (TestCase) :
         self.assertEqual(a.program,b.program)
 
     def test_creature_7(self):
-        # Execute 
+        # Execute Action- Hop
         a = Darwin.Species("a")
         a.addInstruction("hop")
         b = Darwin.Creature(a)
-    
+        game = Darwin.Darwin(4, 4)
+        game.addCreature(b, 0, 0, 2)
+        b.execute(game)
+        self.assertEqual(b.x, 1)
+        self.assertEqual(b.y, 0)
+
     # ------
     # Darwin
     # ------

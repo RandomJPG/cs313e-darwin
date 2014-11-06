@@ -83,33 +83,27 @@ class Creature:
             # Action instructions
             # -------------------
             
-
-            #hHop - If the space ahead is empty, move forward, otherwise, do nothing.
+            # Hop - If the space ahead is empty, move forward, otherwise, do nothing.
             if self.program[line][0] == "hop":
                 if self.d == 0:
-                    ahead = Darwin.grid[self.x - 1][self.y]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.x = self.x -1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x - 1
+                    aheady = self.y 
                 if self.d == 1:
-                    ahead = Darwin.grid[self.x][self.y - 1]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.y = self.y -1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x
+                    aheady = self.y - 1
                 if self.d == 2:
-                    ahead = Darwin.grid[self.x+1][self.y]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.x = self.x + 1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x + 1
+                    aheady = self.y
                 if self.d == 3: 
-                    ahead = Darwin.grid[self.x][self.y+1]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.y = self.y + 1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x
+                    aheady = self.y + 1
+                                    
+                if Darwin.is_empty(aheadx, aheady) == True:
+                    Darwin.grid[self.x][self.y] == "."
+                    self.x = aheadx
+                    self.y = aheady
+                    Darwin.addCreature(self, self.x, self.y, self.d)
+
                 action = 1
                 break
 
@@ -142,34 +136,27 @@ class Creature:
             # change that creature to be of your species
             # reset the program counter, but leave the direction unchanged
             # otherwise, do nothing.
-
-            """
             if self.program[line][0] == "infect":
                 if self.d == 0:
-                    ahead = Darwin.grid[self.x - 1][self.y]
-                    if ahead not ".":
-                        Creature
+                    aheadx = self.x - 1
+                    aheady = self.y 
                 if self.d == 1:
-                    ahead = Darwin.grid[self.x][self.y - 1]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.y = self.y -1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x
+                    aheady = self.y - 1
                 if self.d == 2:
-                    ahead = Darwin.grid[self.x+1][self.y]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.x = self.x + 1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x + 1
+                    aheady = self.y
                 if self.d == 3: 
-                    ahead = Darwin.grid[self.x][self.y+1]
-                    if ahead == ".":
-                        Darwin.grid[self.x][self.y] = "."
-                        self.y = self.y + 1
-                        Darwin.addCreature(self, self.x, self.y, self.d)
+                    aheadx = self.x
+                    aheady = self.y + 1
+                                    
+                if is_enemy(aheadx, aheady, self.species ) == True:
+                    Darwin.grid[aheadx][aheady] ==  self.species.name 
+                else:
+                    continue
                 action = 1
                 break
-            """
+
             # --------------------
             # Control instructions
             # -------------------- 
