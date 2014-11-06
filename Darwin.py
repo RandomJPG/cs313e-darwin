@@ -14,32 +14,12 @@ class Darwin:
         self.creatures = []
         self.grid = [["."]*width for i in range(height)]
 
-    def addCreature(self, Creature, x, y, d):
-        # d is a direction
-        # n, e, s, or w
-        assert type(d) is str        
-
+    def addCreature(self, Creature, x, y, d):       
         self.creatures.append(Creature)
         self.grid[x][y] = Creature
-        Creature.pos = self.grid[x][y]
-         
-
-    # Instructions
-
-    # Action Instructions
-    def hop(self, Creature):
-        if Creature.d == "n":
-            ahead == grid[Creature.x][Creature.y-1]
-        if Creature.d == "e":
-            ahead == grid[Creature.x+1][Creature.y]
-        if Creature.d == "s":
-            ahead == grid[Creature.x][Creature.y+1]
-        if Creature.d == "w":
-            ahead == grid[Creature.x-1][Creature.y]
-
-        if ahead == ".":
-            if 
-            
+        Creature.x = x
+        Creature.y = y
+        Creature.d = d
         
 class Species:
     
@@ -72,7 +52,7 @@ class Creature:
         self.c = None
         self.program = Species.program
 
-    def execute(self):
+    def execute(self, Darwin):
         action = 0
         line = 0
         while (action == 0):
@@ -81,23 +61,88 @@ class Creature:
             # Action instructions
             # -------------------
             
+
+            #hHop - If the space ahead is empty, move forward, otherwise, do nothing.
             if self.program[line][0] == "hop":
-                Darwin.hop(Creature)    
+                if self.d == 0:
+                    ahead = Darwin.grid[self.x - 1][self.y]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.x = self.x -1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
+                if self.d == 1:
+                    ahead = Darwin.grid[self.x][self.y - 1]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.y = self.y -1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
+                if self.d == 2:
+                    ahead = Darwin.grid[self.x+1][self.y]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.x = self.x + 1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
+                if self.d == 3: 
+                    ahead = Darwin.grid[self.x][self.y+1]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.y = self.y + 1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
                 action = 1
                 break
 
+            # left - turn to face left
             if self.program[line][0] == "left":
-                Darwin.left(Creature)
-                action = 1
-                break
-
-            if self.program[line][0] == "right":
-                Darwin.right(Creature)
+                if self.d == 0:
+                    self.d = 3
+                if self.d == 1:
+                    self.d = 0
+                if self.d == 2:
+                    self.d = 1
+                if self.d == 3:
+                    self.d = 0
                 action = 1
                 break
                 
+            # right - turn to face right
+                if self.d == 0:
+                    self.d = 1
+                if self.d == 1:
+                    self.d = 2
+                if self.d == 2:
+                    self.d = 3
+                if self.d == 3:
+                    self.d = 2
+                action = 1
+                break
+                
+            # infect - If the space ahead contains a creature of a different species
+            # change that creature to be of your species
+            # reset the program counter, but leave the direction unchanged
+            # otherwise, do nothing.
             if self.program[line][0] == "infect":
-                Darwin.infect(Creature)
+                if self.d == 0:
+                    ahead = Darwin.grid[self.x - 1][self.y]
+                    if ahead not ".":
+                        Creature
+                if self.d == 1:
+                    ahead = Darwin.grid[self.x][self.y - 1]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.y = self.y -1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
+                if self.d == 2:
+                    ahead = Darwin.grid[self.x+1][self.y]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.x = self.x + 1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
+                if self.d == 3: 
+                    ahead = Darwin.grid[self.x][self.y+1]
+                    if ahead == ".":
+                        Darwin.grid[self.x][self.y] = "."
+                        self.y = self.y + 1
+                        Darwin.addCreature(self, self.x, self.y, self.d)
                 action = 1
                 break
 
@@ -105,27 +150,59 @@ class Creature:
             # Control instructions
             # -------------------- 
 
+            # If the space ahead is empty, go to line n, otherwise, go to the next line.
             if self.program[line][0] == "if_empty":
-                Darwin.if_empty(Creature)
-                line = program[line][1]
-                break
+                if self.d == 0:
+                    ahead = Darwin.grid[self.x - 1][self.y]
+                    if ahead == ".":
+                        line = self.program[line][1]
+                    else:
+                        line +=1
+                        continue
+                if self.d == 1:
+                    ahead = Darwin.grid[self.x][self.y - 1]
+                    if ahead == ".":
+                        line = self.program[line][1]
+                    else:
+                        line +=1
+                        continue
+                if self.d == 2:
+                    ahead = Darwin.grid[self.x+1][self.y]
+                    if ahead == ".":
+                        line = self.program[line][1]
+                    else:
+                        line +=1
+                        continue
+                if self.d == 3: 
+                    ahead = Darwin.grid[self.x][self.y+1]
+                    if ahead == ".":
+                        line = self.program[line][1]
+                    else:
+                        line +=1
+                        continue
 
+            # if_wall - If the space ahead is a wall, go to line n, otherwise, go to the next line.
             if self.program[line][0] == "if_wall":
                 Darwin.if_empty(Creature)
                 line = program[line][1]
                 break
 
+            # if_random - Randomly choose between going to line n or the next line. 
+            # If random.randrange(0, 2) returns an odd number, go to line n. 
+            # Call random.seed(0) at the start of every test case that uses random.randrange().
             if self.program[line][0] == "if_random":
                 Darwin.if_empty(Creature)
                 line = program[line][1]
                 break
 
+            # if_enemy - If the space ahead contains a creature of a different species, go to line n,           
+            # otherwise, go to the next line.
             if self.program[line][0] == "if_enemy":
                 Darwin.if_empty(Creature)
                 line = program[line][1]
                 break
 
+            # go - Go to line n.
             if self.program[line][0] == "go":
-                Darwin.if_empty(Creature)
-                line = program[line][1]
-                break
+                line = self.program[line][1]
+                continue
