@@ -7,7 +7,7 @@
 # imports
 # -------
 
-from random import randrange, seed
+import random
 import Darwin 
 import sys
 
@@ -62,7 +62,7 @@ trap.addInstruction("go 0")
 best = Darwin.Species("best")
 best.addInstruction("if_enemy 2")
 best.addInstruction("hop")
-best.addInstruction("infect"
+best.addInstruction("infect")
 
 # ----------
 # darwin 8x8
@@ -87,6 +87,7 @@ grid.addCreature(f2, 7, 7, 1)
 
 """
 Simulate 5 moves.
+turnlist = [0, 1, 2, 3, 4, 5]
 Print every grid.
 """
 
@@ -109,6 +110,7 @@ grid.addCreature(t2, 6, 8, 0)
 
 """
 Simulate 5 moves.
+turnlist = [0, 1, 2, 3, 4, 5]
 Print every grid.
 """
 
@@ -118,7 +120,7 @@ Print every grid.
 # ------------
 
 print("*** Darwin 72x72 without Best ***")
-seed(0);
+random.seed(0)
 
 grid = Darwin.Darwin(72, 72)
 
@@ -216,7 +218,9 @@ grid.addCreature(t9, random.randrange(0, 72), random.randrange(0, 72), random.ra
 grid.addCreature(t10, random.randrange(0, 72), random.randrange(0, 72), random.randrange(0, 4))
 
 """
+
 Simulate 1000 moves.
+turnlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 Print the first 10 grids          (i.e. 0, 1, 2...9).
 Print every 100th grid after that (i.e. 100, 200, 300...1000).
 """
@@ -227,7 +231,7 @@ Print every 100th grid after that (i.e. 100, 200, 300...1000).
 # ------------
 
 print("*** Darwin 72x72 with Best ***")
-seed(0);
+random.seed(0)
 
 grid = Darwin.Darwin(72, 72)
 
@@ -350,6 +354,7 @@ grid.addCreature(b10, random.randrange(0, 72), random.randrange(0, 72), random.r
 """
 10 Best
 Simulate 1000 moves.
+turnlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 Best MUST outnumber ALL other species for the bonus pts.
 Print the first 10 grids          (i.e. 0, 1, 2...9).
 Print every 100th grid after that (i.e. 100, 200, 300...1000).

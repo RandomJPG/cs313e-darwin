@@ -84,7 +84,7 @@ class TestDarwin (TestCase) :
         # Counter
         a = Darwin.Species("a")
         b = Darwin.Creature(a)
-        self.assertIsNone(b.c)
+        self.assertEqual(b.c, 0)
         
     def test_creature_4(self):
         # Species
@@ -104,17 +104,34 @@ class TestDarwin (TestCase) :
         b = Darwin.Creature(a)
         self.assertEqual(a.program,b.program)
 
-    def test_creature_7(self):
-        # Execute Action- Hop
+        
+    def test_creature_execution_1(self):
+        # Execute Action- Hop no obstacle
         a = Darwin.Species("a")
         a.addInstruction("hop")
         b = Darwin.Creature(a)
         game = Darwin.Darwin(4, 4)
         game.addCreature(b, 0, 0, 2)
-        b.execute(game)
+        b.executeInstruction(game)
         self.assertEqual(b.x, 1)
         self.assertEqual(b.y, 0)
+        self.assertEqual(b.c, 1)
+        
 
+        
+    def test_creature_execution_2(self):
+        # Execute Action - Hop obstacle
+        a = Darwin.Species("a")
+        a.addInstruction("hop")
+        a.addInstruction("go 2")
+        b = Darwin.Creature(a)
+        game = Darwin.Darwin(4, 4)
+        game.addCreature(b, 3, 3, 2)
+        b.executeInstruction(game)
+        self.assertEqual(b.x, 4)
+        self.assertEqual(b.y, 4)
+        self.assertEqual(b.c, 0) 
+       
     # ------
     # Darwin
     # ------
@@ -162,6 +179,7 @@ class TestDarwin (TestCase) :
         b = Darwin.Creature(a)
         game.addCreature(b, 1, 2, 1)
         self.assertEqual(game.grid, [[".",".","."],[".",".", b.species.name]])
+
 
     # --------
     # is_empty

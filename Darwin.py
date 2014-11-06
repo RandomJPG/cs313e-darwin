@@ -42,6 +42,18 @@ class Darwin:
             return False
         else:
             return True
+
+    """
+    def simulate(self, num_games, turnlist):
+        assert type(num_games) is int
+
+        for games in range(num_games + 1):
+
+            if games in gridlist:
+                print ("turn = ", games)                
+                print self.grid
+    """            
+
         
 class Species:
     
@@ -71,12 +83,12 @@ class Creature:
         self.x = None
         self.y = None
         self.d = None
-        self.c = None
+        self.c = 0
         self.program = Species.program
 
-    def execute(self, Darwin):
+    def executeInstruction(self, Darwin):
         action = 0
-        line = 0
+        self.c = self.currentInstruction()
         while (action == 0):
             
             # -------------------
@@ -84,7 +96,7 @@ class Creature:
             # -------------------
             
             # Hop - If the space ahead is empty, move forward, otherwise, do nothing.
-            if self.program[line][0] == "hop":
+            if self.program[self.c][0] == "hop":
                 if self.d == 0:
                     aheadx = self.x - 1
                     aheady = self.y 
@@ -99,11 +111,9 @@ class Creature:
                     aheady = self.y + 1
                                     
                 if Darwin.is_empty(aheadx, aheady) == True:
-                    Darwin.grid[self.x][self.y] == "."
                     self.x = aheadx
                     self.y = aheady
                     Darwin.addCreature(self, self.x, self.y, self.d)
-
                 action = 1
                 break
 
@@ -117,6 +127,7 @@ class Creature:
                     self.d = 1
                 if self.d == 3:
                     self.d = 0
+                self.c += 1
                 action = 1
                 break
                 
@@ -129,6 +140,7 @@ class Creature:
                     self.d = 3
                 if self.d == 3:
                     self.d = 2
+                self.c += 1 
                 action = 1
                 break
                 
@@ -154,6 +166,7 @@ class Creature:
                     Darwin.grid[aheadx][aheady] ==  self.species.name 
                 else:
                     continue
+                self.c += 1
                 action = 1
                 break
 
@@ -222,10 +235,34 @@ class Creature:
             # if_enemy - If the space ahead contains a creature of a different species, go to line n,           
             # otherwise, go to the next line.
             if self.program[line][0] == "if_enemy":
-                Darwin.if_empty(Creature)
-                line = program[line][1]
-                break
-
+                if self.d == 0:
+                    if is_enemy(self.x - 1, self.y) == True:
+                        line = program[line][1]
+                        break
+                    else:
+                        line += 1
+                        break
+                if self.d == 1:
+                    if is_enemy(self.x , self.y - 1) == True:
+                        line = program[line][1]
+                        break
+                    else:
+                        line += 1
+                        break
+                if self.d == 2:
+                    if is_enemy(self.x + 1, self.y) == True:
+                        line = program[line][1]
+                        break
+                    else:
+                        line += 1
+                        break
+                if self.d == 3:
+                    if is_enemy(self.x, self.y + 1) == True:
+                        line = program[line][1]
+                        break
+                    else:
+                        line += 1
+                        break
             # go - Go to line n.
             if self.program[line][0] == "go":
                 line = self.program[line][1]
