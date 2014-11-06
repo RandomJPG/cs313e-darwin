@@ -52,7 +52,7 @@ class Darwin:
             # Creates x axis on top of grid            
             xaxis = "  "
             for axis in range(0, self.w):
-                xaxis += str(axis)
+                xaxis += str(axis % 10)
         
             # Runs game
 
@@ -62,14 +62,13 @@ class Darwin:
             for axis in range(0, self.h):
                 yaxis += str(axis)
 
-            
         
             # Prints out wanted grids
             if grid in gridlist:
-                print ("Turn =", grid,".")
+                print ("Turn =",grid,".")
                 print (xaxis)               
                 for row in range(0, self.h):
-                    print (row ,"".join(self.grid[row]))
+                    print (row % 10 ,"".join(self.grid[row]))
                 print ("\n")         
         
 class Species:
