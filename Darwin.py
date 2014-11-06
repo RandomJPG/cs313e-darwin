@@ -12,12 +12,12 @@ class Darwin:
         self.h = height
         self.w = width
         self.creatures = []
-        
+        self.grid = [["."]*width for i in range(height)]
+
     def addCreature(self, Creature, x, y, d):
         self.creatures.append(Creature)
-        
-        
-        
+        self.grid =[x][y] = Creature
+         
 class Species:
     
     def __init__(self, name):

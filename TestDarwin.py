@@ -131,6 +131,17 @@ class TestDarwin (TestCase) :
         game = Darwin.Darwin(90, 100)
         self.assertEqual(game.h, 90)
         self.assertEqual(game.w, 100)
+    
+    def test_darwin_4(self):
+        # Different height/width, big grid
+        game = Darwin.Darwin(90, 100)
+        self.assertEqual(game.h, 90)
+        self.assertEqual(game.w, 100)
+
+    def test_darwin_5(self):
+        # Test Grid
+        game = Darwin.Darwin(2, 3)
+        self.assertEqual(game.grid, [[".",".","."],[".",".","."]])
           
 # ----
 # main
