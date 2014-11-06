@@ -43,17 +43,34 @@ class Darwin:
         else:
             return True
 
-    """
-    def simulate(self, num_games, turnlist):
-        assert type(num_games) is int
+    def simulate(self, num_moves, gridlist):
+        assert type(num_moves) is int
+        assert type(gridlist) is list
 
-        for games in range(num_games + 1):
+        for grid in range(num_moves + 1):
 
-            if games in gridlist:
-                print ("turn = ", games)                
-                print self.grid
-    """            
+            # Creates x axis on top of grid            
+            xaxis = "  "
+            for axis in range(0, self.w):
+                xaxis += str(axis)
+        
+            # Runs game
 
+
+            # Creates each row
+            yaxis = ""
+            for axis in range(0, self.h):
+                yaxis += str(axis)
+
+            
+        
+            # Prints out wanted grids
+            if grid in gridlist:
+                print ("Turn =", grid,".")
+                print (xaxis)               
+                for row in range(0, self.h):
+                    print (row ,"".join(self.grid[row]))
+                print ("\n")         
         
 class Species:
     

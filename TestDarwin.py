@@ -170,8 +170,7 @@ class TestDarwin (TestCase) :
         # Test Grid
         game = Darwin.Darwin(2, 3)
         self.assertEqual(game.grid, [[".",".","."],[".",".","."]])
-          
-    
+            
     def test_darwin_6(self):
         # Test addCreature
         game = Darwin.Darwin(2, 3)
@@ -267,6 +266,16 @@ class TestDarwin (TestCase) :
         game.addCreature(b1, 0, 0, 1)
         self.assertTrue(game.is_enemy(0, 0, a))
         self.assertFalse(game.is_enemy(0, 3, a))
+
+    # --------
+    # Simulate
+    # --------
+
+    def test_simulate(self):
+        game = Darwin.Darwin(7, 9)
+        num_moves = 5
+        gridlist = [0,1,2,3,4,5]
+        print (game.simulate(num_moves, gridlist))
     
 # ----
 # main
