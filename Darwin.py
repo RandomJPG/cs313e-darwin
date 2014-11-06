@@ -23,6 +23,24 @@ class Darwin:
         self.grid[x][y] = Creature
         Creature.pos = self.grid[x][y]
          
+
+    # Instructions
+
+    # Action Instructions
+    def hop(self, Creature):
+        if Creature.d == "n":
+            ahead == grid[Creature.x][Creature.y-1]
+        if Creature.d == "e":
+            ahead == grid[Creature.x+1][Creature.y]
+        if Creature.d == "s":
+            ahead == grid[Creature.x][Creature.y+1]
+        if Creature.d == "w":
+            ahead == grid[Creature.x-1][Creature.y]
+
+        if ahead == ".":
+            if 
+            
+        
 class Species:
     
     def __init__(self, name):
@@ -52,92 +70,62 @@ class Creature:
         self.y = None
         self.d = None
         self.c = None
-        self.program = Species.program 
+        self.program = Species.program
 
-    def execute(self, grid)
-        turn_over = False
+    def execute(self):
+        action = 0
         line = 0
-        current = program[line]        
-
-        while (turn_over == False):
-                        
-
+        while (action == 0):
+            
             # -------------------
-            # Action instructions  
+            # Action instructions
             # -------------------
+            
+            if self.program[line][0] == "hop":
+                Darwin.hop(Creature)    
+                action = 1
+                break
 
-            # Hop - If the space ahead is empty, move forward, otherwise, do nothing.
-            if current == "hop":
-                if self.d == "n":
-                    ahead == grid[self.x, self.y-1]
-                if self.d == "e":
-                    ahead == grid[self.x+1, self.y]
-                if self.d == "s":
-                    ahead == grid[self.x, self.y+1]
-                if self.d == "w":
-                    ahead == grid[self.x-1, self.y]
+            if self.program[line][0] == "left":
+                Darwin.left(Creature)
+                action = 1
+                break
+
+            if self.program[line][0] == "right":
+                Darwin.right(Creature)
+                action = 1
+                break
                 
-                if ahead == ".":
-                
-                line += 1
-                turn_over = True
-
-            # Left - Turn to face left
-            if current == "left":
-                if self.d == "n":
-                    self.d = "w"
-                if self.d == "e":
-                    self.d = "n"
-                if self.d == "s":
-                    self.d = "w"
-                if self.d == "w":
-                    self.d = "n"
-
-                line += 1
-                turn_over = True
-
-            # Right - Turn to face right.
-            if current == "right":
-                if self.d == "n":
-                    self.d = "e"
-                if self.d == "e":
-                    self.d = "s"
-                if self.d == "s":
-                    self.d = "e"
-                if self.d == "w":
-                    self.d = "s"
-
-                line += 1
-                turn_over = True
-
-            # Infect - If the space ahead contains a creature of a different species
-            # change that creature to be of same species 
-            # reset the program counter, but leave the direction unchanged
-            # otherwise, do nothing.
-            if current == "infect":
-                
-                line += 1
-                turn_over = True
-
+            if self.program[line][0] == "infect":
+                Darwin.infect(Creature)
+                action = 1
+                break
 
             # --------------------
             # Control instructions
-            # --------------------
+            # -------------------- 
 
-            # If the space ahead is empty, go to line n, otherwise, go to the next line.
-            if current == "if_empty":
+            if self.program[line][0] == "if_empty":
+                Darwin.if_empty(Creature)
+                line = program[line][1]
+                break
 
-            # If the space ahead is a wall, go to line n, otherwise, go to the next line.
-            if current == "if_wall":
+            if self.program[line][0] == "if_wall":
+                Darwin.if_empty(Creature)
+                line = program[line][1]
+                break
 
-            # Randomly choose between going to line n or the next line. 
-            # If random.randrange(0, 2) returns an odd number, go to line n. 
-            # Call random.seed(0) at the start of every test case that uses random.randrange().
-            if current == "if_random":
+            if self.program[line][0] == "if_random":
+                Darwin.if_empty(Creature)
+                line = program[line][1]
+                break
 
-            # If the space ahead contains a creature of a different species, go to line n
-            # otherwise, go to the next line.
-            if current == "if_enemy":
+            if self.program[line][0] == "if_enemy":
+                Darwin.if_empty(Creature)
+                line = program[line][1]
+                break
 
-            # Go to line n.
-            if current == "go":
+            if self.program[line][0] == "go":
+                Darwin.if_empty(Creature)
+                line = program[line][1]
+                break
