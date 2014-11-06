@@ -3,6 +3,8 @@
 # jg56492
 # -------------------------------
 
+import random
+
 class Darwin:
     
     def __init__(self, height, width):
@@ -16,10 +18,30 @@ class Darwin:
 
     def addCreature(self, Creature, x, y, d):       
         self.creatures.append(Creature)
-        self.grid[x][y] = Creature
+        self.grid[x][y] = Creature.species.name
         Creature.x = x
         Creature.y = y
         Creature.d = d
+
+    def is_empty(self, x, y):
+        if self.grid[x][y] == ".":
+            return True
+        else:
+            return False
+
+    def is_wall(self, x, y):
+        if (x <= 0) or (y <= 0) or (x >= self.w) or (y >= self.h): 
+            return True
+        else:
+            return False
+
+    def is_enemy(self, x, y, Species):
+        if self.grid[x][y] == ".":
+            return False
+        if self.grid[x][y] == Species.name:
+            return False
+        else:
+            return True
         
 class Species:
     
@@ -120,6 +142,8 @@ class Creature:
             # change that creature to be of your species
             # reset the program counter, but leave the direction unchanged
             # otherwise, do nothing.
+
+            """
             if self.program[line][0] == "infect":
                 if self.d == 0:
                     ahead = Darwin.grid[self.x - 1][self.y]
@@ -145,7 +169,7 @@ class Creature:
                         Darwin.addCreature(self, self.x, self.y, self.d)
                 action = 1
                 break
-
+            """
             # --------------------
             # Control instructions
             # -------------------- 
@@ -174,7 +198,7 @@ class Creature:
                         line +=1
                         continue
                 if self.d == 3: 
-                    ahead = Darwin.grid[self.x][self.y+1]
+                    ahead = Darwin.grid[self.x][self.y+ 1]
                     if ahead == ".":
                         line = self.program[line][1]
                     else:
@@ -183,9 +207,22 @@ class Creature:
 
             # if_wall - If the space ahead is a wall, go to line n, otherwise, go to the next line.
             if self.program[line][0] == "if_wall":
-                Darwin.if_empty(Creature)
-                line = program[line][1]
-                break
+                if self.d == 0:
+                    if is_wall(self.x - 1, self.y) == True:
+                        line = program[line][1]
+                        break
+                if self.d == 1:
+                    if is_wall(self.x , self.y - 1) == True:
+                        line = program[line][1]
+                        break
+                if self.d == 2:
+                    if is_wall(self.x + 1, self.y) == True:
+                        line = program[line][1]
+                        break
+                if self.d == 3:
+                    if is_wall(self.x, self.y + 1) == True:
+                        line = program[line][1]
+                        break
 
             # if_random - Randomly choose between going to line n or the next line. 
             # If random.randrange(0, 2) returns an odd number, go to line n. 
