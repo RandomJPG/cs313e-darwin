@@ -15,8 +15,13 @@ class Darwin:
         self.grid = [["."]*width for i in range(height)]
 
     def addCreature(self, Creature, x, y, d):
+        # d is a direction
+        # n, e, s, or w
+        assert type(d) is str        
+
         self.creatures.append(Creature)
-        self.grid =[x][y] = Creature
+        self.grid[x][y] = Creature
+        Creature.pos = self.grid[x][y]
          
 class Species:
     
@@ -46,5 +51,32 @@ class Creature:
         self.x = None
         self.y = None
         self.d = None
-        self.id = None
-        self.program = Species.program    
+        self.c = None
+        self.program = Species.program 
+
+    def execute(self, grid)
+        action = 0
+        
+        for instruction in self.program:
+            
+            # Action instructions           
+            if instruction[0] == "hop"
+
+            if instruction[0] == "left"
+
+            if instruction[0] == "right"
+
+            if instruction[0] == "infect"
+
+
+            # Control instructions
+
+            if instruction[0] == "if_empty"
+
+            if instruction[0] == "if_wall"
+
+            if instruction[0] == "if_random"
+
+            if instruction[0] == "if_enemy"
+
+            if instruction[0] == "go"

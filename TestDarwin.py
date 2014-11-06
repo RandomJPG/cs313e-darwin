@@ -81,10 +81,10 @@ class TestDarwin (TestCase) :
         self.assertIsNone(b.d)
         
     def test_creature_3(self):
-        # Id
+        # Counter
         a = Darwin.Species("a")
         b = Darwin.Creature(a)
-        self.assertIsNone(b.id)
+        self.assertIsNone(b.c)
         
     def test_creature_4(self):
         # Species
@@ -143,6 +143,15 @@ class TestDarwin (TestCase) :
         game = Darwin.Darwin(2, 3)
         self.assertEqual(game.grid, [[".",".","."],[".",".","."]])
           
+    
+    def test_darwin_6(self):
+        # Test addCreature
+        game = Darwin.Darwin(2, 3)
+        a = Darwin.Species("a")
+        b = Darwin.Creature(a)
+        game.addCreature(b, 1, 2, "n")
+        self.assertEqual(game.grid, [[".",".","."],[".",".", b]])
+
 # ----
 # main
 # ----
