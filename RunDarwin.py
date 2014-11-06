@@ -68,8 +68,6 @@ best.addInstruction("infect")
 # darwin 8x8
 # ----------
 
-print("*** Darwin 8x8 ***")
-
 grid = Darwin.Darwin(8, 8)
 f1 = Darwin.Creature(food)
 h1 = Darwin.Creature(hopper)
@@ -85,17 +83,13 @@ grid.addCreature(h3, 4, 4, 3)
 grid.addCreature(h4, 4, 3, 0)
 grid.addCreature(f2, 7, 7, 1)
 
-"""
-Simulate 5 moves.
+print("*** Darwin 8x8 ***")
 turnlist = [0, 1, 2, 3, 4, 5]
-Print every grid.
-"""
+print (grid.simulate(5, turnlist))
 
 # ----------
 # darwin 7x9
 # ----------
-
-print("*** Darwin 7x9 ***")
 
 grid = Darwin.Darwin(7, 9)
 t1 = Darwin.Creature(trap)
@@ -108,18 +102,15 @@ grid.addCreature(h1, 3, 2, 2)
 grid.addCreature(r1, 5, 4, 1)
 grid.addCreature(t2, 6, 8, 0)
 
-"""
-Simulate 5 moves.
+print("*** Darwin 7x9 ***")
 turnlist = [0, 1, 2, 3, 4, 5]
-Print every grid.
-"""
+print (grid.simulate(5, turnlist))
 
 # ------------
 # darwin 72x72
 # without best
 # ------------
 
-print("*** Darwin 72x72 without Best ***")
 random.seed(0)
 
 grid = Darwin.Darwin(72, 72)
@@ -217,20 +208,16 @@ grid.addCreature(t8, random.randrange(0, 72), random.randrange(0, 72), random.ra
 grid.addCreature(t9, random.randrange(0, 72), random.randrange(0, 72), random.randrange(0, 4))
 grid.addCreature(t10, random.randrange(0, 72), random.randrange(0, 72), random.randrange(0, 4))
 
-"""
-
-Simulate 1000 moves.
+print("*** Darwin 72x72 without Best ***")
 turnlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-Print the first 10 grids          (i.e. 0, 1, 2...9).
-Print every 100th grid after that (i.e. 100, 200, 300...1000).
-"""
+grid.simulate(1000, turnlist)
+
 
 # ------------
 # darwin 72x72
 # with best
 # ------------
 
-print("*** Darwin 72x72 with Best ***")
 random.seed(0)
 
 grid = Darwin.Darwin(72, 72)
@@ -351,11 +338,8 @@ grid.addCreature(b8, random.randrange(0, 72), random.randrange(0, 72), random.ra
 grid.addCreature(b9, random.randrange(0, 72), random.randrange(0, 72), random.randrange(0, 4))
 grid.addCreature(b10, random.randrange(0, 72), random.randrange(0, 72), random.randrange(0, 4))
 
-"""
-10 Best
-Simulate 1000 moves.
+
+print("*** Darwin 72x72 without Best ***")
 turnlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-Best MUST outnumber ALL other species for the bonus pts.
-Print the first 10 grids          (i.e. 0, 1, 2...9).
-Print every 100th grid after that (i.e. 100, 200, 300...1000).
-"""
+grid.simulate(1000, turnlist)
+

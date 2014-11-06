@@ -271,6 +271,9 @@ class TestDarwin (TestCase) :
     # Simulate
     # --------
 
+    """
+    Tests if simulate prints correctly
+
     def test_simulate_1(self):
         game = Darwin.Darwin(8, 8)
         num_moves = 5
@@ -288,6 +291,7 @@ class TestDarwin (TestCase) :
         num_moves = 1000
         gridlist = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
         print (game.simulate(num_moves, gridlist))
+    """
     
 # ----
 # main

@@ -65,11 +65,12 @@ class Darwin:
         
             # Prints out wanted grids
             if grid in gridlist:
-                print ("Turn =",grid,".")
+                print ("Turn = ",grid,".", sep = '')
                 print (xaxis)               
                 for row in range(0, self.h):
                     print (row % 10 ,"".join(self.grid[row]))
-                print ("\n")         
+                print ("\n")   
+                pass       
         
 class Species:
     
