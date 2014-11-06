@@ -55,28 +55,89 @@ class Creature:
         self.program = Species.program 
 
     def execute(self, grid)
-        action = 0
-        
-        for instruction in self.program:
-            
-            # Action instructions           
-            if instruction[0] == "hop"
+        turn_over = False
+        line = 0
+        current = program[line]        
 
-            if instruction[0] == "left"
+        while (turn_over == False):
+                        
 
-            if instruction[0] == "right"
+            # -------------------
+            # Action instructions  
+            # -------------------
 
-            if instruction[0] == "infect"
+            # Hop - If the space ahead is empty, move forward, otherwise, do nothing.
+            if current == "hop":
+                if self.d == "n":
+                    ahead == grid[self.x, self.y-1]
+                if self.d == "e":
+                    ahead == grid[self.x+1, self.y]
+                if self.d == "s":
+                    ahead == grid[self.x, self.y+1]
+                if self.d == "w":
+                    ahead == grid[self.x-1, self.y]
+                
+                if ahead == ".":
+                
+                line += 1
+                turn_over = True
+
+            # Left - Turn to face left
+            if current == "left":
+                if self.d == "n":
+                    self.d = "w"
+                if self.d == "e":
+                    self.d = "n"
+                if self.d == "s":
+                    self.d = "w"
+                if self.d == "w":
+                    self.d = "n"
+
+                line += 1
+                turn_over = True
+
+            # Right - Turn to face right.
+            if current == "right":
+                if self.d == "n":
+                    self.d = "e"
+                if self.d == "e":
+                    self.d = "s"
+                if self.d == "s":
+                    self.d = "e"
+                if self.d == "w":
+                    self.d = "s"
+
+                line += 1
+                turn_over = True
+
+            # Infect - If the space ahead contains a creature of a different species
+            # change that creature to be of same species 
+            # reset the program counter, but leave the direction unchanged
+            # otherwise, do nothing.
+            if current == "infect":
+                
+                line += 1
+                turn_over = True
 
 
+            # --------------------
             # Control instructions
+            # --------------------
 
-            if instruction[0] == "if_empty"
+            # If the space ahead is empty, go to line n, otherwise, go to the next line.
+            if current == "if_empty":
 
-            if instruction[0] == "if_wall"
+            # If the space ahead is a wall, go to line n, otherwise, go to the next line.
+            if current == "if_wall":
 
-            if instruction[0] == "if_random"
+            # Randomly choose between going to line n or the next line. 
+            # If random.randrange(0, 2) returns an odd number, go to line n. 
+            # Call random.seed(0) at the start of every test case that uses random.randrange().
+            if current == "if_random":
 
-            if instruction[0] == "if_enemy"
+            # If the space ahead contains a creature of a different species, go to line n
+            # otherwise, go to the next line.
+            if current == "if_enemy":
 
-            if instruction[0] == "go"
+            # Go to line n.
+            if current == "go":
